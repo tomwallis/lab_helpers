@@ -7,7 +7,7 @@ For testing high bitdepth monitor modes (e.g. ViewPIXX) perceptually.
 """
 
 from __future__ import division
-from psychopy import visual, core, event, gui, data
+from psychopy import visual, core, event, gui, data, monitors
 import numpy as np
 
 # setup params.
@@ -24,9 +24,11 @@ if params['lab?'].lower() == 'n':
     win_y = 600
     win = visual.Window([win_x, win_y], units='pix')
 elif params['lab'].lower() == 'y':
-    win = visual.Window(fullscr=False,
+    mon = monitors.Monitor('viewpixx_dumb_mode')
+    win = visual.Window(size=[win_x, win_y],
+                        fullscr=False,
                         # fullscr=True,
-                        monitor='viewpixx_default')
+                        monitor=mon)
 else:
     raise ValueError('Lab should be either "y" or "n".')
 
