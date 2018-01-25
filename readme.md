@@ -12,6 +12,7 @@ Our lab runs Ubuntu Linux 16.04 LTS. Hardware is a VIEWPixx 3D monitor and Respo
 * responsePIXX button box working, with precision timing
 * high-bitdepth greyscale mode for VIEWPixx, plus calibration
 * improve PsychoPy calibration routines.
+* Get LS100 working (can't connect under Linux; perhaps because serial-to-usb)
 
 ## Notes
 
@@ -68,3 +69,20 @@ Their docs have the below lines:
 `./run.py path/to/file_with_doctests.py`
 
 ... but I'm not sure what they want me to run with that.
+
+
+#### The `pypixxlib` utilities for VPIXX
+
+VPIXX offer a python library `pypixxlib` for interfacing with their hardware.
+We want to use this within (or alongside) psychopy.
+To install the `pypixxlib` in our environment:
+
+1. Download VPIXX Software Tools from their website (under Support; may require
+a user account). Copy it into the user's home directory.
+1. Use pip to install the library into our python environment 
+(remember to have it activated first!):
+
+`pip install -U  PATH_TO_TOOLS/VPixx_Software_Tools/pypixxlib/pypixxlib-XXX.tar.gz`
+
+Note that there's also a command line utility `vputil` that can be used to 
+do things like update firmware on the device, etc.

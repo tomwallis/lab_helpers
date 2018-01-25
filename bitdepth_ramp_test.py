@@ -15,7 +15,6 @@ params = {'lab?': 'n'}
 dlg = gui.DlgFromDict(dictionary=params, title='Location')
 if dlg.OK is False:
     core.quit()  # user pressed cancel
-params['date'] = data.getDateStr()  # add a simple timestamp
 
 
 # Setup window
