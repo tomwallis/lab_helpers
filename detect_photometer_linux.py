@@ -6,10 +6,10 @@ find the LS100 photometer on linux.
 """
 
 
-from __future__ import division
-from psychopy import core, hardware
+from psychopy import core
+from psychopy.hardware import minolta
 
-phot = hardware.minolta.LS100('ttyUSB0')
+phot = minolta.LS100('/dev/ttyUSB0')
 if phot.OK:
     print(phot.getLum())
 else:
