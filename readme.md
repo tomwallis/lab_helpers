@@ -86,3 +86,25 @@ a user account). Copy it into the user's home directory.
 
 Note that there's also a command line utility `vputil` that can be used to 
 do things like update firmware on the device, etc.
+
+
+#### The "pylink" package for interfacing with the Eyelink.
+
+The package `pylink` is distributed by SR research
+for using the Eyelink in Python. It's also
+distributed with Standalone PsychoPy, but that won't work for our dev version.
+
+Download the eyelink developers kit from the
+[SR support website](https://www.sr-support.com/forum/downloads/eyelink-display-software/45-eyelink-developers-kit-for-mac-os-x-mac-os-x-display-software?15-EyeLink-Developers-Kit-for-Mac-OS-X-(Mac-OS-X-Display-Software)=)
+ and follow their prompts.
+
+ Then...
+
+#### The "pylinkwrapper" package for interfacing with the Eyelink.
+
+However it's not so
+simple to use. Enter `pylinkwrapper`, which offers some nice wrapper functions
+for using the `pylink` toolbox more easily. I forked it from its creator
+Nick DiQuattro to here: https://github.com/tomwallis/pylinkwrapper
+
+Clone and install with pip...
