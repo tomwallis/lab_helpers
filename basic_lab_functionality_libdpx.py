@@ -1,7 +1,5 @@
 #!/usr/bin/env python2
 # -*- coding: utf-8 -*-
-from __future__ import print_function
-
 """
 This script can be used to test the basic hardware functionality we want
 to use in our lab:
@@ -24,10 +22,10 @@ The eyelink functionality, if selected, will allow
 3. writing an eye data file.
 
 """
-
+from __future__ import print_function
 from __future__ import division
 from psychopy import visual, core, event, gui, data, monitors
-from pypixxlib import _libdpx as libdpx
+# from pypixxlib import _libdpx as libdpx
 import numpy as np
 
 # setup params.
@@ -38,7 +36,6 @@ params = {'lab?': 'n',
 dlg = gui.DlgFromDict(dictionary=params, title='Location')
 if dlg.OK is False:
     core.quit()  # user pressed cancel
-
 
 # Setup window
 if params['lab?'].lower() == 'n':
@@ -55,6 +52,12 @@ if params['lab?'].lower() == 'n':
 
     use_dpx = False
 
+    # importing pylink and pylinkwrapper needs a system path set:
+    import sys
+    sys.path.append('/Applications/Eyelink/pylink')
+    sys.path.append('/Users/tsawallis/Dropbox/Python')
+    import pylinkwrapper
+
 elif params['lab'].lower() == 'y':
     mon = monitors.Monitor('viewpixx_dumb_mode')
     win = visual.Window(size=[win_x, win_y],
@@ -65,6 +68,13 @@ elif params['lab'].lower() == 'y':
     if ((params['highbit?'].lower() == 'y') or
             (params['responsePIXX??'].lower() == 'y')):
         use_dpx = True
+
+    if (params['eyetracker?'].lower() == 'y'):
+        # importing pylink and pylinkwrapper needs a system path set:
+        import sys
+        sys.path.append('TODO: lab path')
+        sys.path.append('TODO: lab path')
+        import pylinkwrapper
 
 else:
     raise ValueError('Lab should be either "y" or "n".')
@@ -80,6 +90,11 @@ if use_dpx is True:
     libdpx.DPxSetDinBuff(int("C00000", 16), int("400000", 16))
     libdpx.DPxSetDinDataOut(int("000000", 16))
     libdpx.DPxUpdateRegCache()
+
+# enable eyelink (will do dummy connection if none found):
+tracker = pylinkwrapper.Connect(win, 'edf_tmp')
+# Calibrate eye-tracker
+tracker.calibrate()
 
 # get real window size. If on Tom's Macbook (retina display), opened
 # window is double the size in px as specified.

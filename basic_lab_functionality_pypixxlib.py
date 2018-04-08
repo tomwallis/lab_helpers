@@ -54,6 +54,12 @@ if params['lab?'].lower() == 'n':
 
     use_dpx = False
 
+    # importing pylink and pylinkwrapper needs a system path set:
+    import sys
+    sys.path.append('/Applications/Eyelink/pylink')
+    sys.path.append('/Users/tsawallis/Dropbox/Python')
+    import pylinkwrapper
+
 elif params['lab'].lower() == 'y':
     mon = monitors.Monitor('viewpixx_dumb_mode')
     win = visual.Window(size=[win_x, win_y],
@@ -65,6 +71,12 @@ elif params['lab'].lower() == 'y':
             (params['responsePIXX??'].lower() == 'y')):
         use_dpx = True
 
+    # importing pylink and pylinkwrapper needs a system path set:
+    import sys
+    sys.path.append('TODO')
+    sys.path.append('TODO')
+    import pylinkwrapper
+
 else:
     raise ValueError('Lab should be either "y" or "n".')
 
@@ -74,6 +86,12 @@ if use_dpx is True:
     if params['highbit?'].lower() == 'y':
         my_device.setVideoMode('M16')  # Set the right video mode
     my_device.updateRegisterCache()  # Update the device
+
+# enable eyelink (will do dummy connection if none found):
+tracker = pylinkwrapper.Connect(win, 'edf_tmp')
+# Calibrate eye-tracker
+tracker.calibrate()
+
 
 # get real window size. If on Tom's Macbook (retina display), opened
 # window is double the size in px as specified.

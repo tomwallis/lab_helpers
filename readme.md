@@ -98,13 +98,33 @@ Download the eyelink developers kit from the
 [SR support website](https://www.sr-support.com/forum/downloads/eyelink-display-software/45-eyelink-developers-kit-for-mac-os-x-mac-os-x-display-software?15-EyeLink-Developers-Kit-for-Mac-OS-X-(Mac-OS-X-Display-Software)=)
  and follow their prompts.
 
- Then...
+Because SR research seem to distribute pylink as compiled python (`.pyc`), we
+need to add these to the python path to import (needs to be done for *every
+session*). First duplicate the compiled version appropriate for
+your python version (here 2.7) into a new folder called simply `pylink`.
+So this new folder should be nested in `pylink/pylink`. Then:
+
+```python
+import sys
+sys.path.append('location/of/pylink')  # note to top dir not version specific
+import pylink
+
+```
 
 #### The "pylinkwrapper" package for interfacing with the Eyelink.
 
-However it's not so
-simple to use. Enter `pylinkwrapper`, which offers some nice wrapper functions
+The `pylink` package is quite low-level and not so simple to use. Enter
+`pylinkwrapper`, which offers some nice wrapper functions
 for using the `pylink` toolbox more easily. I forked it from its creator
 Nick DiQuattro to here: https://github.com/tomwallis/pylinkwrapper
 
-Clone and install with pip...
+Since it has no `setup.py` we can't install easily with `pip`. We can
+recreate the above by setting the system path to know where it is before
+import:
+
+```python
+import sys
+sys.path.append('location/of/pylink')  # note to top dir not version specific
+sys.path.append('location/of/pylinkwrapper')  # note should be dir above pylinkwrapper
+import pylinkwrapper
+```
